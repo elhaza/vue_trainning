@@ -1,0 +1,51 @@
+*{
+    font-family: Arial;
+}
+.container {
+    margin: auto;
+    width: 1200px;
+}
+.container .form {
+    border: solid 1px #d5e5ff;
+    background-color: #fff;
+    box-shadow: 6px -5px 5px rgb(179 173 212);
+    border-radius: 25px;
+    padding: 40px;
+    width: 500px;
+    margin: auto;
+}
+
+.container .form input, .container .form select, .container .form textarea {
+    width: 500px;
+    min-height: 23px;
+    margin-bottom: 10px;
+}
+
+.container .form input.date {
+    width: 170px;
+    margin-right: 23px;
+}
+.container .form input.time {
+    width: 50px;
+ }
+
+img {
+    max-width: 130px;
+}
+
+
+table.tasks {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+table.tasks th, table.tasks td {
+    text-align: left;
+    padding: 16px;
+}
+
+table.tasks tr:nth-child(even) {
+    background-color: #f2f2f2;
+}

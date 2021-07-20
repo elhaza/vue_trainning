@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 1</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="js/app.js" defer></script>
+</head>
+<body>
+<div class="container" id="TrackerApp">
+    <form class="form" v-on:submit.prevent="addTask()" method="post">
+        <div>Date:
+            <input class="date" v-model='date' name="txtFrom" type="date" required />
+            Hours:
+            <input class="time" v-model='hours' name="TiempoTextBox" type="number" step="any" />
+        </div>
+        <div>
+            <select v-model='project' name="idProyectoDropDownList" required>
+                <option value="">Select Project</option>
+                <option v-for="project in projects" v-bind:value="project">{{project.name}}</option>
+            </select>
+        </div>
+
+        <div><select v-model='assignmentType' name="idTipoAsignacionDropDownList" required>
+            <option value=''>Select Assignment type</option>
+            <option v-for="assignment in assignmentTypes" v-bind:value="assignment">{{assignment.name}}</option>
+        </select></div>
+        <div><textarea v-model='description' cols="20" name="DescripcionTextBox" rows="5" placeholder="Description (500 characters max)" required></textarea></div>
+        <div>
+            <select v-model="client" name="idFocalPointClientDropDownList" required>
+                <option value="">Select Client Focal Point</option>
+                <option v-for="client in clients">{{client}}</option>
+            </select>
+        </div>
+        <div>
+            <div><input name='btnAceptar' type="submit" value="Add" /></div>
+        </div>
+    </form>
+
+    <h1 v-if="assignmentType.id===100">Trainning time!</h1>
+
+    <img v-bind:src="displayRole">
+
+    <table class="tasks">
+        <thead>
+            <tr>
+                <th>Date</td>
+                <th>Hours</td>
+                <th>Project</td>
+                <th>Assignment Type</td>
+                <th>Description</td>
+                <th>Client</td>
+            </tr>
+        </thead>
+        <tr v-for="task in tasks">
+            <td>{{task.date}}</td>
+            <td>{{task.hours}}</td>
+            <td>{{task.project}}</td>
+            <td>{{task.assignmentType}}</td>
+            <td>{{ $filters.previewDescription(task.description) }}</td>
+            <td>{{task.client}}</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
