@@ -10,10 +10,9 @@
 <body>
 <div class="container" id="TrackerApp">
     <form class="form" v-on:submit.prevent="addTask()" method="post">
-        <div>Date:
-            <input class="date" v-model='date' name="txtFrom" type="date" required />
-            Hours:
-            <input class="time" v-model='hours' name="TiempoTextBox" type="number" step="any" />
+        <div>
+            Date: <input class="date" v-model='date' name="txtFrom" type="date" required />
+            Hours: <input class="time" v-model='hours' name="TiempoTextBox" type="number" step="any" />
         </div>
         <div>
             <select v-model='project' name="idProyectoDropDownList" required>
@@ -22,10 +21,12 @@
             </select>
         </div>
 
-        <div><select v-model='assignmentType' name="idTipoAsignacionDropDownList" required>
-            <option value=''>Select Assignment type</option>
-            <option v-for="assignment in assignmentTypes" v-bind:value="assignment">{{assignment.name}}</option>
-        </select></div>
+        <div>
+            <select v-model='assignmentType' name="idTipoAsignacionDropDownList" required>
+                <option value=''>Select Assignment type</option>
+                <option v-for="assignment in assignmentTypes" v-bind:value="assignment">{{assignment.name}}</option>
+            </select>
+        </div>
         <div><textarea v-model='description' cols="20" name="DescripcionTextBox" rows="5" placeholder="Description (500 characters max)" required></textarea></div>
         <div>
             <select v-model="client" name="idFocalPointClientDropDownList" required>
