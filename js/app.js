@@ -81,7 +81,7 @@ app.component('task-row', {
 
 app.component('table-tasks', {
     props: {
-        tasks: Object,
+        tasks: Array,
     },
     template:
     `<table class="tasks">
