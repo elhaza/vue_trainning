@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <title>Assignment 1</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://unpkg.com/vue@next" defer></script>
-    <script src="js/app.js" defer></script>
 </head>
 <body>
 <div class="container" id="TrackerApp">
@@ -22,11 +20,12 @@
         </div>
 
         <div>
-            <select v-model='assignmentType' name="idTipoAsignacionDropDownList" required>
-                <option value=''>Select Assignment type</option>
-                <option v-for="assignment in assignmentTypes" v-bind:value="assignment">{{assignment.name}}</option>
+            <select v-model='aType' name="idAType" required>
+                <option value="">Select Assignment Type</option>
+                <option v-for="aType in assignmentTypes" v-bind:value="aType">{{aType.name}}</option>
             </select>
         </div>
+        
         <div><textarea v-model='description' cols="20" name="DescripcionTextBox" rows="5" placeholder="Description (500 characters max)" required></textarea></div>
         <div>
             <select v-model="client" name="idFocalPointClientDropDownList" required>
@@ -39,30 +38,11 @@
         </div>
     </form>
 
-    <h1 v-if="assignmentType.id===100">Trainning time!</h1>
-
     <img v-bind:src="displayRole">
 
-    <table class="tasks">
-        <thead>
-            <tr>
-                <th>Date</td>
-                <th>Hours</td>
-                <th>Project</td>
-                <th>Assignment Type</td>
-                <th>Description</td>
-                <th>Client</td>
-            </tr>
-        </thead>
-        <tr v-for="task in tasks">
-            <td>{{task.date}}</td>
-            <td>{{task.hours}}</td>
-            <td>{{task.project}}</td>
-            <td>{{task.assignmentType}}</td>
-            <td>{{ $filters.previewDescription(task.description) }}</td>
-            <td>{{task.client}}</td>
-        </tr>
-    </table>
+    <table-tasks :tasks="tasks"></table-tasks>
 </div>
+<script src="https://unpkg.com/vue@next"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

@@ -1,12 +1,11 @@
 
-
 const app = Vue.createApp({
     data(){
         return {
             date: '',
             hours: 0,
             project:'',
-            assignmentType: '',
+            aType: '',
             description: '',
             client:'',
             image: 'images/project-manager.png',
@@ -24,14 +23,19 @@ const app = Vue.createApp({
                 {id: 24, name: 'Staffing'}, {id: 32, name: 'Technical Interviews'}, {id: 42, name: 'Technical Interviews'},
                 {id: 33, name: 'Test Review'}, {id: 13, name: 'Testing'}, {id: 4, name: 'Training'}, {id: 10, name: 'UI/UX/Graphic Design'}],
             clients: ["Jonathan Chavez", "Victor Antunes"],
-            tasks:[]
+            tasks:[
+                {date:'2021-01-01', project:"Arvig", hours: '8', aType:"Sourcing", description: 'Initial Row #01 for testing', client:"Victor Antunes"},
+                {date:'2021-01-01', project:"Vue Js mentoring program", hours: '2', aType:"Vue Js trainning", description: 'Row #02 for testing purposes', client:"Jonathan Chavez"},
+                {date:'2021-01-01', project:"Arvig", hours: '4', aType:"Vue Js trainning", description: 'Description goes here', client:"Jonathan Chavez"}
+
+            ]
         }
     },
     methods: {
         addTask(){
-            this.tasks.push({date:this.date, project:this.project.name, hours: this.hours, assignmentType: this.assignmentType.name,
+            this.tasks.push({date:this.date, project:this.project.name, hours: this.hours, aType: this.aType.name,
                 description: this.description, client:this.client});
-                this.assignmentType = '';
+                this.aType = '';
                 this.description = '';
         }
     },
@@ -57,5 +61,45 @@ app.config.globalProperties.$filters = {
         return value;
     }
 }
+
+app.component('task-row', {
+    props: {
+        task: Object,
+    },
+    template:
+    `<tr>
+        <td>{{task.date}}</td>
+        <td>{{task.hours}}</td>
+        <td>{{task.project}}</td>
+        <td>{{task.aType}}</td>
+        <td>{{task.description}}</td>
+        <td>{{task.client}}</td>
+    </tr>
+    `
+});
+
+
+app.component('table-tasks', {
+    props: {
+        tasks: Object,
+    },
+    template:
+    `<table class="tasks">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Hours</th>
+                <th>Project</th>
+                <th>Assignment Type</th>
+                <th>Description</th>
+                <th>Client</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr is="vue:task-row" :key="index" v-for="(task, index) in tasks" :task="task"></tr>
+        </tbody>
+    </table>
+    `
+});
 
 app.mount('#TrackerApp');
